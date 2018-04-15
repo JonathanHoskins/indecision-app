@@ -1,5 +1,3 @@
-'use strict';
-
 // const square = function (x){
 //     return x * x;
 // }
@@ -14,10 +12,10 @@
 
 //Challenge - Use arrow functions
 //getFirstName
-var fullName = 'Jonathan Hoskins';
-var firstName = void 0;
+const fullName = 'Jonathan Hoskins';
+let firstName;
 
-var getFirstName = function getFirstName(fullName) {
+const getFirstName = (fullName) => {
     if (fullName) {
         firstName = fullName.split(' ')[0];
         console.log(firstName);

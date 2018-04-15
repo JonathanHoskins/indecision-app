@@ -4,13 +4,13 @@ console.log("App.js is running");
 //Use title/subtitle in the template
 //Render template
 
-var app = {
+const app = {
     title: 'Indecision App',
     subtitle: 'Put your life in the hands of a computer',
     options: ['one', 'two']
 };
 
-var template = (
+const template = (
     <div>
         <h1>{app.title}</h1>
         {app.subtitle && <p>{app.subtitle}</p>}
@@ -22,19 +22,25 @@ var template = (
     </div>
 );
 
-var user = {
+function getLocation (location) {
+    if (location){
+        return <p>Location: {location}</p>;
+    }
+};
+
+const user = {
     name: 'Jon',
     age: 30,
     location: 'Chattanooga'
 };
 
 
-var userName = 'Jon';
-var userAge = 30;
-var userLocation = 'Chattanooga';
+const userName = 'Jon';
+const userAge = 30;
+const userLocation = 'Chattanooga';
 
 
 
-var appRoot = document.getElementById('app');
+const appRoot = document.getElementById('app');
 
 ReactDOM.render(template, appRoot);
