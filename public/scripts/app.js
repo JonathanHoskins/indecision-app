@@ -1,7 +1,5 @@
 'use strict';
 
-var _util = require('util');
-
 //Arguments object - no longer bound with arrow functions
 
 var add = function add(a, b) {
@@ -16,9 +14,12 @@ var user = {
     name: 'Jon',
     cities: ['Philadelphia', 'New York', 'Dublin'],
     printPlacesLived: function printPlacesLived() {
-        console.log(this.name);
-        console.log(this.cities);
+        var _this = this;
+
+        var cityMessages = this.cities.map(function (city) {
+            return _this.name + ' has lived in ' + city;
+        });
+        return cityMessages;
     }
 };
-
-user.printPlacesLived();
+console.log(user.printPlacesLived());

@@ -1,5 +1,3 @@
-import { print } from "util";
-  
 //Arguments object - no longer bound with arrow functions
 
 const add  =  (a, b) => {
@@ -17,10 +15,11 @@ console.log(add(55, 1, 1001));
 const user = {
     name: 'Jon',
     cities: ['Philadelphia', 'New York', 'Dublin'],
-    printPlacesLived: function () {
-        console.log(this.name);
-        console.log(this.cities);
+    printPlacesLived() {
+        const cityMessages = this.cities.map((city) =>{
+            return this.name + ' has lived in ' + city;
+        });
+        return cityMessages;
     }
 };
-
-user.printPlacesLived();
+console.log(user.printPlacesLived());
