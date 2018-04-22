@@ -6,7 +6,7 @@ const add  =  (a, b) => {
 
 
 console.log(add(55, 1, 1001));
-
+ 
 
 
 
@@ -16,10 +16,14 @@ const user = {
     name: 'Jon',
     cities: ['Philadelphia', 'New York', 'Dublin'],
     printPlacesLived() {
-        const cityMessages = this.cities.map((city) =>{
-            return this.name + ' has lived in ' + city;
-        });
-        return cityMessages;
+        return this.cities.map((city) => this.name + ' has lived in ' + city);
     }
 };
-console.log(user.printPlacesLived());
+console.log(user.printPlacesLived()); 
+
+// Challenge area
+
+const multiplier = {
+    //numbers - array of numbers
+    //multiplyBy - single number
+};
