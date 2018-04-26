@@ -24,6 +24,12 @@ console.log(user.printPlacesLived());
 // Challenge area
 
 const multiplier = {
-    //numbers - array of numbers
-    //multiplyBy - single number
+
+    numbers: [1, 3, 5],
+    multiplyBy: 9,
+    multiply() {
+        return this.numbers.map((number) => number * this.multiplyBy);
+    }
 };
+
+console.log(multiplier.multiply());

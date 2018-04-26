@@ -1,28 +1,77 @@
 'use strict';
 
-//Arguments object - no longer bound with arrow functions
+console.log("App.js is running");
 
-var add = function add(a, b) {
-    return a + b;
+//Create app object title/subtitle
+//Use title/subtitle in the template
+//Render template
+
+var app = {
+    title: 'Indecision App',
+    subtitle: 'Put your life in the hands of a computer',
+    options: []
 };
 
-console.log(add(55, 1, 1001));
+var onFormSubmit = function onFormSubmit(e) {
+    e.preventDefault();
 
-//This keyword - no longer bound
+    var option = e.target.elements.option.value;
 
-var user = {
-    name: 'Jon',
-    cities: ['Philadelphia', 'New York', 'Dublin'],
-    printPlacesLived: function printPlacesLived() {
-        var _this = this;
-
-        return this.cities.map(function (city) {
-            return _this.name + ' has lived in ' + city;
-        });
+    if (option) {
+        app.options.push(options);
+        e.target.elements.option.value = '';
     }
 };
-console.log(user.printPlacesLived());
 
-// Challenge area
+var template = React.createElement(
+    'div',
+    null,
+    React.createElement(
+        'h1',
+        null,
+        app.title
+    ),
+    app.subtitle && React.createElement(
+        'p',
+        null,
+        app.subtitle
+    ),
+    React.createElement(
+        'p',
+        null,
+        app.options.length > 0 ? 'Here are your options' : 'No options'
+    ),
+    React.createElement(
+        'p',
+        null,
+        app.options.length
+    ),
+    React.createElement(
+        'ol',
+        null,
+        React.createElement(
+            'li',
+            null,
+            'Item one'
+        ),
+        React.createElement(
+            'li',
+            null,
+            'Item two'
+        )
+    ),
+    React.createElement(
+        'form',
+        { onSubmit: onFormSubmit },
+        React.createElement('input', { type: 'text', name: 'option' }),
+        React.createElement(
+            'button',
+            null,
+            'Add Option'
+        )
+    )
+);
 
-var multiplier = {};
+var appRoot = document.getElementById('app');
+
+ReactDOM.render(template, appRoot);

@@ -7,7 +7,18 @@ console.log("App.js is running");
 const app = {
     title: 'Indecision App',
     subtitle: 'Put your life in the hands of a computer',
-    options: ['one', 'two']
+    options: []
+};
+
+const onFormSubmit= (e) => {
+    e.preventDefault();
+
+    const option = e.target.elements.option.value;
+
+    if(option){
+        app.options.push(options);
+        e.target.elements.option.value = '';
+    }
 };
 
 const template = (
@@ -15,32 +26,18 @@ const template = (
         <h1>{app.title}</h1>
         {app.subtitle && <p>{app.subtitle}</p>}
         <p>{app.options.length > 0 ? 'Here are your options' : 'No options'}</p>
+        <p>{app.options.length}</p> 
         <ol>
             <li>Item one</li>
             <li>Item two</li>
         </ol>
+        <form onSubmit={onFormSubmit}>
+            <input type="text" name="option"/>
+            <button>Add Option</button>
+        </form>
     </div>
 );
 
-function getLocation (location) {
-    if (location){
-        return <p>Location: {location}</p>;
-    }
-};
-
-const user = {
-    name: 'Jon',
-    age: 30,
-    location: 'Chattanooga'
-};
-
-
-const userName = 'Jon';
-const userAge = 30;
-const userLocation = 'Chattanooga';
-
-
-
-const appRoot = document.getElementById('app');
-
+const appRoot = document.getElementById('app'); 
+ 
 ReactDOM.render(template, appRoot);
