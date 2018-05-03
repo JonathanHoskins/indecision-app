@@ -10,34 +10,60 @@ const app = {
     options: []
 };
 
-const onFormSubmit= (e) => {
+const onFormSubmit = (e) => {
     e.preventDefault();
 
     const option = e.target.elements.option.value;
 
-    if(option){
-        app.options.push(options);
+    if (option) {
+        app.options.push(option);
         e.target.elements.option.value = '';
+        renderOptions();
     }
 };
 
-const template = (
-    <div>
-        <h1>{app.title}</h1>
-        {app.subtitle && <p>{app.subtitle}</p>}
-        <p>{app.options.length > 0 ? 'Here are your options' : 'No options'}</p>
-        <p>{app.options.length}</p> 
-        <ol>
-            <li>Item one</li>
-            <li>Item two</li>
-        </ol>
-        <form onSubmit={onFormSubmit}>
-            <input type="text" name="option"/>
-            <button>Add Option</button>
-        </form>
-    </div>
-);
+// Create remove all button above list
+// on click => wipe array and re-render
 
-const appRoot = document.getElementById('app'); 
- 
+const reset = () => {
+    app.options = [];
+    renderOptions();
+};
+
+const appRoot = document.getElementById('app');
+
+const numbers = [55, 101, 1000];
+
+const renderOptions = () => {
+    const template = (
+        <div>
+            <h1>{app.title}</h1>
+            {app.subtitle && <p>{app.subtitle}</p>}
+            <p>{app.options.length > 0 ? 'Here are your options' : 'No options'}</p>
+            <p>{app.options.length}</p>
+            <button onClick={reset}>Reset All</button>
+            {
+                numbers.map((number) => {
+                    return <p key={number}>Number: {number}</p>;
+                })
+            }
+            <ol>
+                {/* Map over app.options getting back an array of li */}
+            </ol>
+            <form onSubmit={onFormSubmit}>
+                <input type="text" name="option" />
+                <button>Add Option</button>
+                {
+                    app.options.map((option) => {
+                        return <p key={option}>Option: {option}</p>;
+                    })
+                }
+            </form>
+        </div>
+    );
 ReactDOM.render(template, appRoot);
+}
+
+
+
+renderOptions();

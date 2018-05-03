@@ -18,60 +18,82 @@ var onFormSubmit = function onFormSubmit(e) {
     var option = e.target.elements.option.value;
 
     if (option) {
-        app.options.push(options);
+        app.options.push(option);
         e.target.elements.option.value = '';
+        renderOptions();
     }
 };
 
-var template = React.createElement(
-    'div',
-    null,
-    React.createElement(
-        'h1',
-        null,
-        app.title
-    ),
-    app.subtitle && React.createElement(
-        'p',
-        null,
-        app.subtitle
-    ),
-    React.createElement(
-        'p',
-        null,
-        app.options.length > 0 ? 'Here are your options' : 'No options'
-    ),
-    React.createElement(
-        'p',
-        null,
-        app.options.length
-    ),
-    React.createElement(
-        'ol',
-        null,
-        React.createElement(
-            'li',
-            null,
-            'Item one'
-        ),
-        React.createElement(
-            'li',
-            null,
-            'Item two'
-        )
-    ),
-    React.createElement(
-        'form',
-        { onSubmit: onFormSubmit },
-        React.createElement('input', { type: 'text', name: 'option' }),
-        React.createElement(
-            'button',
-            null,
-            'Add Option'
-        )
-    )
-);
+// Create remove all button above list
+// on click => wipe array and re-render
+
+var reset = function reset() {
+    app.options = [];
+    renderOptions();
+};
 
 var appRoot = document.getElementById('app');
 
-ReactDOM.render(template, appRoot);
+var numbers = [55, 101, 1000];
+
+var renderOptions = function renderOptions() {
+    var template = React.createElement(
+        'div',
+        null,
+        React.createElement(
+            'h1',
+            null,
+            app.title
+        ),
+        app.subtitle && React.createElement(
+            'p',
+            null,
+            app.subtitle
+        ),
+        React.createElement(
+            'p',
+            null,
+            app.options.length > 0 ? 'Here are your options' : 'No options'
+        ),
+        React.createElement(
+            'p',
+            null,
+            app.options.length
+        ),
+        React.createElement(
+            'button',
+            { onClick: reset },
+            'Reset All'
+        ),
+        numbers.map(function (number) {
+            return React.createElement(
+                'p',
+                { key: number },
+                'Number: ',
+                number
+            );
+        }),
+        React.createElement('ol', null),
+        React.createElement(
+            'form',
+            { onSubmit: onFormSubmit },
+            React.createElement('input', { type: 'text', name: 'option' }),
+            React.createElement(
+                'button',
+                null,
+                'Add Option'
+            ),
+            app.options.map(function (option) {
+                return React.createElement(
+                    'p',
+                    { key: option },
+                    'Option: ',
+                    option
+                );
+            })
+        )
+    );
+    ReactDOM.render(template, appRoot);
+};
+
+renderOptions();
