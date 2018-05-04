@@ -30,9 +30,13 @@ const reset = () => {
     renderOptions();
 };
 
-const appRoot = document.getElementById('app');
+const onMakeDecision = () => {
+    const randomNum = Math.floor(Math.random() * app.options.length);
+    const option = app.options[randomNum];
+    alert(option);
+};
 
-const numbers = [55, 101, 1000];
+const appRoot = document.getElementById('app');
 
 const renderOptions = () => {
     const template = (
@@ -41,23 +45,19 @@ const renderOptions = () => {
             {app.subtitle && <p>{app.subtitle}</p>}
             <p>{app.options.length > 0 ? 'Here are your options' : 'No options'}</p>
             <p>{app.options.length}</p>
+            <button onClick={onMakeDecision}>What should I do?</button>
             <button onClick={reset}>Reset All</button>
-            {
-                numbers.map((number) => {
-                    return <p key={number}>Number: {number}</p>;
-                })
-            }
             <ol>
-                {/* Map over app.options getting back an array of li */}
+                {
+                    app.options.map((option) => {
+                        return <li key={option}>Option: {option}</li>;
+                    })
+                }
             </ol>
             <form onSubmit={onFormSubmit}>
                 <input type="text" name="option" />
                 <button>Add Option</button>
-                {
-                    app.options.map((option) => {
-                        return <p key={option}>Option: {option}</p>;
-                    })
-                }
+                
             </form>
         </div>
     );

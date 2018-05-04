@@ -32,9 +32,13 @@ var reset = function reset() {
     renderOptions();
 };
 
-var appRoot = document.getElementById('app');
+var onMakeDecision = function onMakeDecision() {
+    var randomNum = Math.floor(Math.random() * app.options.length);
+    var option = app.options[randomNum];
+    alert(option);
+};
 
-var numbers = [55, 101, 1000];
+var appRoot = document.getElementById('app');
 
 var renderOptions = function renderOptions() {
     var template = React.createElement(
@@ -62,18 +66,26 @@ var renderOptions = function renderOptions() {
         ),
         React.createElement(
             'button',
+            { onClick: onMakeDecision },
+            'What should I do?'
+        ),
+        React.createElement(
+            'button',
             { onClick: reset },
             'Reset All'
         ),
-        numbers.map(function (number) {
-            return React.createElement(
-                'p',
-                { key: number },
-                'Number: ',
-                number
-            );
-        }),
-        React.createElement('ol', null),
+        React.createElement(
+            'ol',
+            null,
+            app.options.map(function (option) {
+                return React.createElement(
+                    'li',
+                    { key: option },
+                    'Option: ',
+                    option
+                );
+            })
+        ),
         React.createElement(
             'form',
             { onSubmit: onFormSubmit },
@@ -82,15 +94,7 @@ var renderOptions = function renderOptions() {
                 'button',
                 null,
                 'Add Option'
-            ),
-            app.options.map(function (option) {
-                return React.createElement(
-                    'p',
-                    { key: option },
-                    'Option: ',
-                    option
-                );
-            })
+            )
         )
     );
     ReactDOM.render(template, appRoot);
