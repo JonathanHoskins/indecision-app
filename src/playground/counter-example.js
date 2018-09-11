@@ -9,6 +9,7 @@ class Counter extends React.Component{
         };
     }
     
+    //Adds 1 to the count
     handleAddOne() {
         
         this.setState((prevState) => {
